@@ -1,0 +1,9 @@
+Task 1 (c): The slope is approximately -0.73, meaning that for every additional 100 meters away from the nearest MRT station, the house price decreases by about 0.73 units (7,300 New Taiwan dollars per ping).
+
+Task 2 (c): The degree-2 polynomial (quadratic) model is better because its mean CV RMSE (~4.19) is substantially lower than the linear baseline (~8.95).
+
+Task 3 (d):
+
+Comparison: Tuning polynomial features with Ridge regularization reduced the mean CV RMSE from ~10.20 MPa (linear baseline) down to ~6.09 MPa, capturing non-linear relationships between curing age, water/cement ratios, and strength.
+Degree-2 Interaction Term Example: Cement * Water (or Cement * Age).
+Why Scaling Belongs Inside the Pipeline:Prevents Data Leakage: During cross-validation, StandardScaler computes the mean and standard deviation only on the 4 training folds before transforming the validation fold. Scaling before GridSearchCV leaks validation distribution statistics into training.Fair Regularization: Ridge penalizes the sum of squared coefficients ($\alpha \sum b_j^2$). Polynomial expansion creates terms on vastly different numerical scales (e.g., $x^3$ vs. $x$); scaling puts all features on unit variance so Ridge shrinks them fairly.   
